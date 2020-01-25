@@ -44,8 +44,29 @@
 	font-family:Satisfy;
 	font-family:'Tangerine',serif;
 	font-weight:100;
-	
 	}
+	.bt6
+	{
+	background-color:purple;
+	font-family:Satisfy;
+	font-family:'Tangerine',serif;
+	font-weight:100;
+	}
+	.bt7
+	{
+	background-color:yellow;
+	font-family:Satisfy;
+	font-family:'Tangerine',serif;
+	font-weight:100;
+	}
+	.bt8
+	{
+	background-color:orange;
+	font-family:Satisfy;
+	font-family:'Tangerine',serif;
+	font-weight:100;
+	}
+	
          header
             {
                
@@ -68,7 +89,7 @@
 	  html
             {
 		font-family:Satisfy;
-                background:url('hd.gif');
+                background:url('city4.gif');
   		background-position: center; 
   		background-repeat: no-repeat; 
   		background-size: cover;
@@ -105,22 +126,23 @@
 
 	</style>
         <title>Fun</title>
-        <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
+        <script>
 	</script>
         <script>
 var con;
 var con2;
+var img;
 	function selectFile()
 		{
 
                 var d = document.getElementById("file1");
                 var c = document.getElementById("canvas");
                 con = c.getContext('2d');
-                var img = new Image;
+                 img = new Image;
                 img.onload = function ()
 		 {
                     con.drawImage(img, 0, 0,canvas.width,canvas.height);
-                    alert('the image is drawn');
+                  
                 }
                 img.src = URL.createObjectURL(d.files[0]);
             	}
@@ -133,7 +155,7 @@ var con2;
 	alert("Select Some File First");
 	return;
 	}
-       var pixeldata=con.getImageData(0,0,canvas.width,canvas.height);
+        var pixeldata=con.getImageData(0,0,canvas.width,canvas.height);
 	for(var i=0;i<pixeldata.data.length;i+=4)
 	{
 	var avg=pixeldata.data[i]+pixeldata.data[i+1]+pixeldata.data[i+2];
@@ -154,12 +176,115 @@ var con2;
 	}
 
 	}
+	
 	var c2=document.getElementById("canvas2");
  	con2=c2.getContext("2d");
 
 	con2.putImageData(pixeldata,0,0);
 
-        }
+  
+
+	}
+	function orange()
+	{
+
+	if(con==null)
+	{
+	alert("Select Some File First");return;
+	}
+       var pixeldata=con.getImageData(0,0,canvas.width,canvas.height);
+	for(var i=0;i<pixeldata.data.length;i+=4)
+	{
+	var avg=pixeldata.data[i]+pixeldata.data[i+1]+pixeldata.data[i+2];
+	avg=avg/3;
+	if(avg<128)
+	{
+	pixeldata.data[i+2]=0;
+	pixeldata.data[i+1]=0.8*avg;
+	pixeldata.data[i]=2*avg;
+	
+	}
+	else
+	{
+	pixeldata.data[i+2]=2*avg-255;
+	pixeldata.data[i+1]=1.2*avg-51;
+	pixeldata.data[i]=255;
+
+	}
+	}
+	var c2=document.getElementById("canvas2");
+	con2=c2.getContext("2d");
+
+	con2.putImageData(pixeldata,0,0);
+
+
+
+	}
+	function yellow()
+	{
+
+	if(con==null)
+	{
+	alert("Select Some File First");return;}
+       var pixeldata=con.getImageData(0,0,canvas.width,canvas.height);
+	for(var i=0;i<pixeldata.data.length;i+=4)
+	{
+	var avg=pixeldata.data[i]+pixeldata.data[i+1]+pixeldata.data[i+2];
+	avg=avg/3;
+	if(avg<128)
+	{
+	pixeldata.data[i+2]=0;
+	pixeldata.data[i+1]=2*avg;
+	pixeldata.data[i]=2*avg;
+	
+	}
+	else
+	{
+	pixeldata.data[i+2]=2*avg-255;
+	pixeldata.data[i+1]=255;
+	pixeldata.data[i]=255;
+
+	}
+	}
+var c2=document.getElementById("canvas2");
+con2=c2.getContext("2d");
+
+con2.putImageData(pixeldata,0,0);
+
+}
+	
+	function purple()
+	{
+
+	if(con==null)
+	{
+	alert("Select Some File First");return;}
+       var pixeldata=con.getImageData(0,0,canvas.width,canvas.height);
+	for(var i=0;i<pixeldata.data.length;i+=4)
+	{
+	var avg=pixeldata.data[i]+pixeldata.data[i+1]+pixeldata.data[i+2];
+	avg=avg/3;
+	if(avg<128)
+	{
+	pixeldata.data[i+2]=2*avg;
+	pixeldata.data[i+1]=0;
+	pixeldata.data[i]=0.8*avg;
+	
+	}
+	else
+	{
+	pixeldata.data[i+2]=255;
+	pixeldata.data[i+1]=2*avg-255;
+	pixeldata.data[i]=1.2*avg-51;
+
+	}
+	}
+var c2=document.getElementById("canvas2");
+con2=c2.getContext("2d");
+
+con2.putImageData(pixeldata,0,0);
+
+}
 	function grayscale()
 	{
    	if(con==null)
@@ -419,13 +544,23 @@ con2.clearRect(0, 0,canvas.width,canvas.height);
 
 else if(con==null)
 {alert("Select file first");
-return;}
+return;
+}
 con=null;
 con2=null;
 document.getElementById("file1").value = "";
 }
+function download()
+{
 
 
+
+
+
+
+
+
+}
  	</script>
     	</head>
     	<body>
@@ -438,8 +573,11 @@ document.getElementById("file1").value = "";
 <canvas id="canvas2" width="500" height="300" style="border:1px solid #000000;"></canvas>
 <div>Select image:</div>
 <input type="file" multiple="false" accept="image/*" id="file1" onchange="selectFile()">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<input class="sc" type="button" value="Reset Everything" onclick="reset()" style="font-size:30px; width=20% "/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input class="sc" type="button" value="Reset Everything" onclick="reset()" style="font-size:30px; width=20% "/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
 <div>Choose filter:</div>
@@ -449,9 +587,14 @@ document.getElementById("file1").value = "";
 <input class="bt3" type="button" value="Rainbow" onclick="rainbow()" style="font-size:30px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input class="bt4" type="button" value="Green" onclick="green()" style="font-size:30px;"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <input class="bt5" type="button" value="Blue" onclick="blue()" style="font-size:30px;"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input class="bt6" type="button" value="Violet" onclick="purple()" style="font-size:30px;"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input class="bt7" type="button" value="Yellow" onclick="yellow()" style="font-size:30px;"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input class="bt8" type="button" value="Orange" onclick="orange()" style="font-size:30px;"/>
 
 <br><br>
 
 </body>
 </html>
-
